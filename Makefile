@@ -8,9 +8,9 @@ TARGET = arm-none-eabi
 LIBPATH = -L$(ROOTDIR)/$(TARGET)/lib -L$(ROOTDIR)/../libgba/lib
 INCPATH = -I. -I$(ROOTDIR)/$(TARGET)/include -I$(ROOTDIR)/../libgba/include
 
-CCFLAGS = -std=c99 -O2 -nostartfiles -mlittle-endian -mthumb -mthumb-interwork -mtune=arm7tdmi -mcpu=arm7tdmi -Wall -c -fomit-frame-pointer
+CCFLAGS = -std=c99 -O2 -mlittle-endian -mthumb -mthumb-interwork -mtune=arm7tdmi -mcpu=arm7tdmi -Wall -c -fomit-frame-pointer
 HWFLAGS = -m2 -mb -O1 -std=c99 -Wall -c -fomit-frame-pointer
-LDFLAGS = -T gba_cart.ld -mthumb -mthumb-interwork -Wl,-Map=output.map -nostdlib -nostartfiles
+LDFLAGS = -T gba_mb.ld -mthumb -mthumb-interwork -Wl,-Map=output.map
 ASFLAGS = -mcpu=arm7tdmi -EL --defsym LINEAR_CROSSFADE=1
 
 PREFIX = $(ROOTDIR)/bin/$(TARGET)-
@@ -52,4 +52,4 @@ $(OUTPUT).elf: $(OBJS)
 	$(AS) $(ASFLAGS) $(INCPATH) $< -o $@
 
 clean:
-	$(RM) music/*.o *.o *.bin *.gba *.elf output.map
+	$(RM) music/*.o *.o *.gba *.elf output.map
